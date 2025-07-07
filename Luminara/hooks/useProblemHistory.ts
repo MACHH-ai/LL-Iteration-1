@@ -12,9 +12,9 @@ export function useProblemHistory() {
   const fetchProblems = useCallback(async () => {
     // Reset error state
     setError(null);
-    setIsLoading(true);
 
     try {
+      setIsLoading(true);
       // Check if user is authenticated
       if (!isAuthenticated || !user) {
         console.log('User not authenticated, returning empty problems list');

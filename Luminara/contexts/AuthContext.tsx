@@ -128,6 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const initializeAuth = async () => {
+    dispatch({ type: 'SET_LOADING', payload: true });
     try {
       const token = await getSecurely('auth_token');
       const userJson = await getSecurely('user_data');
@@ -143,6 +144,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     } catch (error) {
       console.error('Failed to initialize auth:', error);
+      // Set a default guest user if initialization fails
+      const guestUser: User = {
+        id: DEFAULT_USER_ID,
+        email: '',
+        firstName: 'Guest',
+        lastName: 'User',
+        isGuest: true,
+        createdAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+      };
+      dispatch({ type: 'SET_USER', payload: guestUser });
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
     }

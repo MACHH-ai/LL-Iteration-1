@@ -47,19 +47,20 @@ export function useProblemSubmission() {
     // Reset previous state
     setError(null);
     setResult(null);
+    setIsSubmitting(true);
 
     // Validate input data
     if (!data.title.trim()) {
+      setIsSubmitting(false);
       setError('Problem title is required');
       return null;
     }
 
     if (!data.textContent?.trim() && !data.imageData && !data.voiceUrl) {
+      setIsSubmitting(false);
       setError('Problem content is required');
       return null;
     }
-
-    setIsSubmitting(true);
 
     try {
       // Determine user ID to use
