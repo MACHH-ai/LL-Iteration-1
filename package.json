@@ -1,6 +1,6 @@
 {
   "name": "bolt-expo-starter",
-  "main": "luminara",
+  "main": "Luminara/expo-router/entry",
   "version": "1.0.0",
   "private": true,
   "scripts": {
